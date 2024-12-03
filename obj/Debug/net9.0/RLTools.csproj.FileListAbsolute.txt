@@ -1,0 +1,14 @@
+C:\Users\szpia\workspaces\RiderProjects\RLTools\bin\Debug\net9.0\RLTools.exe
+C:\Users\szpia\workspaces\RiderProjects\RLTools\bin\Debug\net9.0\RLTools.deps.json
+C:\Users\szpia\workspaces\RiderProjects\RLTools\bin\Debug\net9.0\RLTools.runtimeconfig.json
+C:\Users\szpia\workspaces\RiderProjects\RLTools\bin\Debug\net9.0\RLTools.dll
+C:\Users\szpia\workspaces\RiderProjects\RLTools\bin\Debug\net9.0\RLTools.pdb
+C:\Users\szpia\workspaces\RiderProjects\RLTools\obj\Debug\net9.0\RLTools.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\szpia\workspaces\RiderProjects\RLTools\obj\Debug\net9.0\RLTools.AssemblyInfoInputs.cache
+C:\Users\szpia\workspaces\RiderProjects\RLTools\obj\Debug\net9.0\RLTools.AssemblyInfo.cs
+C:\Users\szpia\workspaces\RiderProjects\RLTools\obj\Debug\net9.0\RLTools.csproj.CoreCompileInputs.cache
+C:\Users\szpia\workspaces\RiderProjects\RLTools\obj\Debug\net9.0\RLTools.dll
+C:\Users\szpia\workspaces\RiderProjects\RLTools\obj\Debug\net9.0\refint\RLTools.dll
+C:\Users\szpia\workspaces\RiderProjects\RLTools\obj\Debug\net9.0\RLTools.pdb
+C:\Users\szpia\workspaces\RiderProjects\RLTools\obj\Debug\net9.0\RLTools.genruntimeconfig.cache
+C:\Users\szpia\workspaces\RiderProjects\RLTools\obj\Debug\net9.0\ref\RLTools.dll

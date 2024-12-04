@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RLTools")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6bd781ef5d3cc87e8e5183337b1606e0e3ddd22d")]
 [assembly: System.Reflection.AssemblyProductAttribute("RLTools")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RLTools")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

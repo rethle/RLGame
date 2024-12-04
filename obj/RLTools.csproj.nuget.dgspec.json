@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\szpia\\workspaces\\RiderProjects\\RLTools\\RLTools.csproj": {}
+    "C:\\Users\\szpia\\workspaces\\RiderProjects\\RLGame\\RLTools.csproj": {}
   },
   "projects": {
-    "C:\\Users\\szpia\\workspaces\\RiderProjects\\RLTools\\RLTools.csproj": {
+    "C:\\Users\\szpia\\workspaces\\RiderProjects\\RLGame\\RLTools.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\szpia\\workspaces\\RiderProjects\\RLTools\\RLTools.csproj",
+        "projectUniqueName": "C:\\Users\\szpia\\workspaces\\RiderProjects\\RLGame\\RLTools.csproj",
         "projectName": "RLTools",
-        "projectPath": "C:\\Users\\szpia\\workspaces\\RiderProjects\\RLTools\\RLTools.csproj",
+        "projectPath": "C:\\Users\\szpia\\workspaces\\RiderProjects\\RLGame\\RLTools.csproj",
         "packagesPath": "C:\\Users\\szpia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\szpia\\workspaces\\RiderProjects\\RLTools\\obj\\",
+        "outputPath": "C:\\Users\\szpia\\workspaces\\RiderProjects\\RLGame\\obj\\",
         "projectStyle": "PackageReference",
         "UsingMicrosoftNETSdk": false,
         "configFilePaths": [

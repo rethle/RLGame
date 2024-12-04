@@ -1,30 +1,35 @@
 using FastConsole;
 namespace RLTools;
 
-public class Div : TuiElement
+public class Div : UIElement
 {
     public readonly int Breadth;
-    private List<TuiElement> elements_;
+    private int width_;
+    private int height_;
+    
+    private List<UIElement> elements_;
     private Directions split_;
 
-    public Div(Directions split, int breadth, TuiElement? parent = null)
+    public Div(Directions split, int width, int height)
     {
-        if (parent == null)
-        {
-            display_ = new char[FConsole.WindowWidth, FConsole.WindowHeight];
-        }
-
         split_ = split;
-        Breadth = breadth;
-        //TBI
+        width_ = width;
+        height_ = height;
+        if (split == Directions.Horizontal)
+            Breadth = width;
+        else if (split == Directions.Vertical)
+            Breadth = height;
+        else
+            throw new ArgumentException("Split is an invalid value");
+        elements_ = new List<UIElement>();
     }
 
-    public override char[,] GetImage()
+    public CharInfo[,] GetImage()
     {
         if (elements_.Count == 0)
-            return display_;
+            return new CharInfo[width_, height_];
         
-        List<char[,]> images = new List<char[,]>();
+        List<CharInfo[,]> images = new List<CharInfo[,]>();
         foreach (var element in elements_)
         {
             images.Add(element.GetImage());

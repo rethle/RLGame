@@ -1,72 +1,94 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Text;
 
 namespace RLTools;
 
 public class ColoredString
 {
-    CharInfo[] text_;
+    private const ConsoleColor DefaultForeground = ConsoleColor.White;
+    private const ConsoleColor DefaultBackground = ConsoleColor.Black;
+    public int Length => text_.Count;
+    
+    private List<CharInfo> text_ = new List<CharInfo>();
 
-    public ColoredString()
-    {
-        text_ = new CharInfo[0];
-    }
-
+    public ColoredString(){}
     public ColoredString(ColoredString coloredString)
     {
-        coloredString.text_.CopyTo(text_, 0);
+        
     }
-    
     public ColoredString(string text, ConsoleColor foreground, ConsoleColor background)
     {
-        text_ = new CharInfo[text.Length];
-        for (int i = 0; i < text.Length; i++)
+        foreach (var ch in text)
         {
-            text_[i] = new CharInfo(text[i], foreground, background);
+            text_.Add(new CharInfo(ch, foreground, background));
         }
     }
 
-    private ColoredString(int length)
+    //For purely debug reasons
+    public override string ToString()
     {
-        text_ = new CharInfo[length];
+        StringBuilder strBuilder = new StringBuilder(text_.Count);
+        foreach (var charInfo in text_)
+        {
+            strBuilder.Append(charInfo.Character);
+        }
+        return strBuilder.ToString();
     }
 
-    private List<ColoredString> Split(ColoredString colStr, char delimiter)
+    private static List<ColoredString> Split(ColoredString coloredString, char delimiter)
     {
-        var colStrings = new List<ColoredString>();
+        var coloredStrings = new List<ColoredString>();
         ColoredString currentColStr = new ColoredString();
-        for (int i = 0; i < colStr.text_.Length; i++)
+        foreach(var element in coloredString.text_)
         {
-            if (colStr.text_[i].Character == delimiter && !currentColStr.IsEmpty())
+            if (element.Character == delimiter && !currentColStr.IsEmpty())
             {
-                colStrings.Append(currentColStr);
+                coloredStrings.Add(currentColStr);
                 currentColStr = new ColoredString();
                 continue;
             }
-            if(colStr.text_[i].Character == delimiter)
+            if(element.Character == delimiter)
                 continue;
-            currentColStr += colStr.text_[i];
+            currentColStr.Append(element);
         }
 
-        return colStrings;
+        return coloredStrings;
+    }
+
+    public static CharInfo[,] ToCharInfoArray(ColoredString coloredString, char delimiter, int width)
+    {
+        List<ColoredString> words = Split(coloredString, delimiter);
+        
     }
 
     public bool IsEmpty()
     {
-        return text_.Length == 0;
+        return text_.Count == 0;
     }
-    
-    public static ColoredString operator +(ColoredString colStr1, ColoredString colStr2)
+    public ColoredString Append(ColoredString coloredString)
     {
-        ColoredString sum = new ColoredString(colStr1.text_.Length + colStr2.text_.Length);
-        Array.Copy(colStr1.text_, sum.text_, colStr1.text_.Length);
-        Array.Copy(colStr2.text_, 0, sum.text_, colStr1.text_.Length, colStr2.text_.Length);
-        return sum;
+        text_.AddRange(coloredString.text_);
+        return this;
+    }
+    public ColoredString Append(CharInfo charInfo)
+    {
+        text_.Add(charInfo);
+        return this;
+    }
+    public ColoredString Append(string text, ConsoleColor foreground, ConsoleColor background)
+    {
+        var coloredText = new List<CharInfo>(text.Length);
+        foreach (var ch in text)
+        {
+            coloredText.Add(new CharInfo(ch, foreground, background));
+        }
+        text_.AddRange(coloredText);
+        return this;
     }
 
-    public static ColoredString operator +(ColoredString colStr, CharInfo colChar)
+    public ColoredString Append(string text)
     {
-        ColoredString sum = new ColoredString(colStr);
-        sum.text_.Append(colChar);
-        return sum;
+        var foreground = IsEmpty() ? DefaultForeground : text_.Last().Foreground;
+        var background = IsEmpty() ? DefaultBackground : text_.Last().Background;
+        return Append(text, foreground, background);
     }
 }

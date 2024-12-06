@@ -7,7 +7,9 @@ class Program
     {
         var a = new ColoredString("Albicla ", ConsoleColor.Red, ConsoleColor.Yellow);
         var b = new ColoredString("is excellent!", ConsoleColor.Blue, ConsoleColor.Magenta);
-        ColoredString c = a + b;
+        ColoredString c = new ColoredString();
+        a.Append(b).Append(c);
+        Console.WriteLine(c.ToString());
         Console.ReadKey();
     }
 }

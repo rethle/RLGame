@@ -34,11 +34,11 @@ public class ColoredString
         return strBuilder.ToString();
     }
 
-    private static List<ColoredString> Split(ColoredString coloredString, char delimiter)
+    private List<ColoredString> Split(char delimiter)
     {
         var coloredStrings = new List<ColoredString>();
         ColoredString currentColStr = new ColoredString();
-        foreach(var element in coloredString.text_)
+        foreach(var element in text_)
         {
             if (element.Character == delimiter && !currentColStr.IsEmpty())
             {
@@ -50,20 +50,73 @@ public class ColoredString
                 continue;
             currentColStr.Append(element);
         }
-
+        coloredStrings.Add(currentColStr);
+        
         return coloredStrings;
     }
 
-    public static CharInfo[,] ToCharInfoArray(ColoredString coloredString, char delimiter, int width)
+    public CharInfo[] ToArray() => text_.ToArray();
+
+    public CharInfo[,] To2DArray(char delimiter, int width)
     {
-        List<ColoredString> words = Split(coloredString, delimiter);
-        
+        List<ColoredString> words = Split(delimiter);
+        var page = new Dictionary<int, List<ColoredString>>();
+        page[0] = [];
+        int charsLeftOnLine = width;
+        int currentPage = 0;
+        foreach (var word in words)
+        {
+            if(word.Length > width)
+                //Need to implement word splitting
+                continue;
+            if (word.Length > charsLeftOnLine)
+            {
+                currentPage++;
+                page[currentPage] = [];
+                charsLeftOnLine = width;
+            }
+            page[currentPage].Add(word);
+            charsLeftOnLine -= word.Length;
+            charsLeftOnLine -= charsLeftOnLine <= 0 ? 0 : 1;
+        }
+
+        var textBlock = new CharInfo[width, page.Count];
+        var cursorPosition = new IntVector2(0, 0);
+        var lastCharInfo = new CharInfo(' ', ConsoleColor.White, ConsoleColor.Black);
+        foreach (var line in page.Values)
+        {
+            foreach (var word in line)
+            {
+                foreach (var charInfo in word.ToArray())
+                {
+                    textBlock[cursorPosition.X, cursorPosition.Y] = charInfo;
+                    cursorPosition.X++;
+                    lastCharInfo = charInfo;
+                }
+
+                if(word == line.Last())
+                {
+                    while (width - cursorPosition.X > 0)
+                    {
+                        textBlock[cursorPosition.X, cursorPosition.Y] = new CharInfo(' ',
+                            lastCharInfo.Foreground, lastCharInfo.Background);
+                        cursorPosition.X++;
+                    }
+                    continue;
+                }
+            
+                textBlock[cursorPosition.X, cursorPosition.Y] = new CharInfo(delimiter,
+                    lastCharInfo.Foreground, lastCharInfo.Background);
+                cursorPosition.X++;
+            }
+            cursorPosition.X = 0;
+            cursorPosition.Y++;
+        }
+
+        return textBlock;
     }
 
-    public bool IsEmpty()
-    {
-        return text_.Count == 0;
-    }
+    public bool IsEmpty() => text_.Count == 0;
     public ColoredString Append(ColoredString coloredString)
     {
         text_.AddRange(coloredString.text_);
